@@ -1,8 +1,26 @@
 class Engine
 {
+    /**
+    * @type{HTMLCanvasElement};
+    */
+   // ^ask
+
     static canvas
 
+    /**
+    * @type{CanvasRenderingContext2D}
+    */  
+   // ^ask
+    
+
     static ctx
+
+
+    static currentScene  
+
+
+
+
 
     static start()
     {
@@ -12,6 +30,8 @@ class Engine
 
         addEventListener("keydown", Input.keydown);
         addEventListener("keyup", Input.keyup);
+
+        Engine.currentScene.start();
 
         requestAnimationFrame(Engine.gameLoop);
 
@@ -23,12 +43,14 @@ class Engine
     {
         Engine.update();
         Engine.draw();
+
+        
         requestAnimationFrame(Engine.gameLoop);
     }
 
     static update()
     {
-        update();
+        Engine.currentScene.update();
     }
 
 
@@ -37,6 +59,6 @@ class Engine
         // Clear the canvas
         Engine.canvas.width = window.innerWidth;
         Engine.canvas.height = window.innerHeight;
-        draw(Engine.ctx);
+        Engine.currentScene.draw(Engine.ctx);
     }
 }

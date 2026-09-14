@@ -1,7 +1,8 @@
 
+<!doctype html>
 <html>
     <head>
-        <title>Test Page</title>
+        <title>Blocky Toppy 2</title>
         <style>
             *{
                 margin: 0;
@@ -17,76 +18,31 @@
 
 
         </canvas>
-        <script src = "../engine/Vector2.js"> 
-        </script>
-        <script src = "../engine/Engine.js">  
-        </script>
-        <script src = "../engine/Input.js">  
-        </script>
+        <script src="../engine/Vector2.js"></script>
+    <script src="../engine/Input.js"></script>
+    <script src="../engine/Engine.js"></script>
+    <script src="../engine/Component.js"></script>
+    <script src="../engine/GameObject.js"></script>
+    <script src="../engine/Scene.js"></script>
+    <script src="../engine/components/Transform.js"></script>
+    <script src="../engine/components/Polygon.js"></script>
+
+    <script src="MainScene.js"></script>
+    <script src="MainGameObject.js"></script>
+    <script src="DrawComponent.js"></script>
+    <script src="DrawComponent2.js"></script>
+    <script src="GroundGameObject.js"></script>
+
+    <script src="UpdateComponent.js"></script>
+    <script src="LaserController.js"></script>
+    <script src="LaserGameObject.js"></script>
+    <script src="LaserPolygon.js"></script>
 
         <script>
-            let canvas = document.querySelector("#canv");
-            let ctx = canvas.getContext("2d");
-
-            let position = new Vector2(20, 50);
-
-            
-
-            function update(){
-                //position.x = position.x + 0.2;
-            }
-
-            if(Input.keysDown.includes("ArrowRight"))
-            {
-                position.x = position.x + 0.2;
-            }
-
-            function draw(){
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            
-
-            ctx.save();
-
-            ctx.translate(position.x, position.y);
-
-           
-
-
-
-            ctx.lineTo(0, 0);
-            ctx.lineTo(50, 30);
-            ctx.lineTo(50, 20);
-            ctx.lineTo(60, 0);
-            ctx.lineTo(70, 20);
-            ctx.lineTo(80, 0);
-            ctx.lineTo(90, 20);
-            ctx.lineTo(90, 30);
-            ctx.lineTo(140, 0);
-            ctx.lineTo(140, 50);
-            ctx.lineTo(70, 80);
-            ctx.lineTo(0, 50);
-            ctx.lineTo(0, 0);
-
-
-
-
-
-
-            ctx.fillStyle = "black";
-            ctx.fill();
-
-
-
-            ctx.restore();
-            }
             
 
 
-            //requestAnimationFrame(gameLoop);
-
+            Engine.currentScene = new MainScene();
             Engine.start();
             
         </script>

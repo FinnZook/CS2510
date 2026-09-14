@@ -1,6 +1,19 @@
 class Input
 {
+
+    /**
+     * @type{string[]}
+     */
+
+
+
     static keysDown = [];
+
+
+    /**
+     * 
+     * @param {KeyboardEvent} event
+     */
 
     static keydown(event)
     {
@@ -9,6 +22,14 @@ class Input
             Input.keysDown.push(event.code);
         }
     }
+
+
+    /**
+     * 
+     * @param {KeyboardEvent} event 
+ */
+
+
 
     static keyup(event)
     {
