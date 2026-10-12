@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html>
+    <head>
+        <title>Blocky Toppy 2</title>
+        <style>
+            *{
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canv">
+
+        
+
+
+
+        </canvas>
+    <script src="../../engine/Vector2.js"></script>
+    <script src="../../engine/Input.js"></script>
+    <script src="../../engine/Engine.js"></script>
+    <script src="../../engine/Component.js"></script>
+    <script src="../../engine/GameObject.js"></script>
+    <script src="../../engine/Scene.js"></script>
+
+    <script src="../../engine/components/Transform.js"></script>
+    <script src="../../engine/components/Polygon.js"></script>
+    <script src="../../engine/components/Camera.js"></script>
+
+
+    <script src="MainScene.js"></script>
+    <script src="MainGameObject.js"></script>
+    <script src="DrawComponent.js"></script>
+    <script src="DrawComponent2.js"></script>
+    <script src="GroundGameObject.js"></script>
+    <script src="PlayerTrailGameObject.js"></script>
+
+
+    <script src="UpdateComponent.js"></script>
+    <script src="TrailUpdateComponent.js"></script>
+    <script src="LaserController.js"></script>
+    <script src="LaserGameObject.js"></script>
+    <script src="LaserPolygon.js"></script>
+
+    <script src="../../engine/SceneManager.js"></script>
+    <script src="../../engine/Time.js"></script>
+
+    <script src="./Settings.js"></script>
+
+
+
+        <script>
+            
+
+
+            Engine.start(MainScene, Settings);
+            
+        </script>
+    </body>
+
+</html>

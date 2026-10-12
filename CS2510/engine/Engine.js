@@ -16,22 +16,42 @@ class Engine
     static ctx
 
 
-    static currentScene  
+    static layers = ["default", "UI"]
 
 
 
 
-
-    static start()
+    static start(nextScene, settings)
     {
+        
         Engine.canvas = document.querySelector("#canv");
 
-        Engine.ctx = Engine.canvas.getContext("2d");
+    
+
+        Engine.ctx = Engine.canvas.getContext("2d")
+
+        
+        
+
+
+
+        //OG//Engine.canvas = document.querySelector("#canv");
+
+        //OG//Engine.ctx = Engine.canvas.getContext("2d");
 
         addEventListener("keydown", Input.keydown);
         addEventListener("keyup", Input.keyup);
 
-        Engine.currentScene.start();
+        addEventListener("mousedown", Input.mousedown);
+        addEventListener("mouseup", Input.mouseup);
+
+        SceneManager.nextScene = nextScene
+
+
+
+        if(settings){
+            Engine.layers = settings.layers
+        }
 
         requestAnimationFrame(Engine.gameLoop);
 
@@ -41,8 +61,14 @@ class Engine
 
     static gameLoop()
     {
+        SceneManager.update()
+
         Engine.update();
         Engine.draw();
+
+        Time.update();
+
+
 
         
         requestAnimationFrame(Engine.gameLoop);
@@ -50,7 +76,9 @@ class Engine
 
     static update()
     {
-        Engine.currentScene.update();
+        SceneManager.currentScene.start()
+        SceneManager.currentScene.update()
+        // // ^ ^ Engine.currentScene.update();
     }
 
 
@@ -59,6 +87,8 @@ class Engine
         // Clear the canvas
         Engine.canvas.width = window.innerWidth;
         Engine.canvas.height = window.innerHeight;
-        Engine.currentScene.draw(Engine.ctx);
+        SceneManager.currentScene.draw(Engine.ctx);
+        // // ^ Engine.currentScene.draw(Engine.ctx);
+
     }
 }
