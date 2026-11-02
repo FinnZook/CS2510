@@ -1,0 +1,8 @@
+class CreatureUpdateComponent extends Component {
+
+    
+
+
+
+
+}
