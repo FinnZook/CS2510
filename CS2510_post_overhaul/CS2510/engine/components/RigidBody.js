@@ -5,7 +5,7 @@ class RigidBody extends Component {
     gravity = 0
 
 
-    update()
+    fixedUpdate()
     {
         this.velocity.plusEquals(new Vector2(0, this.gravity).scaled(Time.deltaTime))
 

@@ -14,7 +14,7 @@ class SquareController extends Component {
     vertical_dash_force
     horizontal_dash_force
     horiz_movement_noise_threshhold
-    how_many_trails_to_spawn
+    trails_per_dash
     trail_spawn_interval
     max_stored_dashes
 
@@ -40,13 +40,15 @@ class SquareController extends Component {
     down_pressed = false
     left_pressed = false
     right_pressed = false
+    how_many_trails_to_spawn = 0
+    
 
 
 
     
   start() {
 
-    //this.trail_spawn_timer = 0;
+    this.trail_spawn_timer = 0;
 
     this.Get_Movement_Tuning_Variables()
 
@@ -56,14 +58,41 @@ class SquareController extends Component {
   update() {
     
     this.Update_Cooldowns();
+    this.Player_Trail_Protocol();
+    
 
         this.up_pressed = Input.keysDown.includes("ArrowUp") || Input.keysDown.includes("KeyW")
         this.down_pressed = Input.keysDown.includes("ArrowDown") || Input.keysDown.includes("KeyS")
         this.left_pressed = Input.keysDown.includes("ArrowLeft") || Input.keysDown.includes("KeyA")
         this.right_pressed = Input.keysDown.includes("ArrowRight") || Input.keysDown.includes("KeyD")
+        
+
 
         let jump_just_pressed = this.up_pressed && !this.jump_was_held
         this.jump_was_held = this.up_pressed
+
+
+
+        if (Input.keysDown.includes("KeyZ"))
+        {
+            this.Switch_To_No_Weapon()
+        }
+
+
+        
+
+        if (Input.keysDown.includes("KeyQ"))
+        {
+            this.Switch_To_Shotgun()
+        }
+
+
+        if (Input.keysDown.includes("KeyE"))
+        {
+            this.Switch_To_Sniper()
+        }
+
+
 
 
         if (Input.keysDown.includes("Space"))
@@ -150,7 +179,8 @@ class SquareController extends Component {
 
       this.horiz_movement_noise_threshhold = Globals.horiz_movement_noise_threshhold
 
-      this.how_many_trails_to_spawn = Globals.how_many_trails_to_spawn
+      //this.how_many_trails_to_spawn = Globals.how_many_trails_to_spawn BAD
+      this.trails_per_dash = Globals.trails_per_dash
       this.trail_spawn_interval = Globals.trail_spawn_interval
 
       this.max_stored_dashes = Globals.max_stored_dashes
@@ -166,6 +196,28 @@ class SquareController extends Component {
       this.can_we_jump_yet = this.jump_cooldown_remaining <= 0;
       this.can_we_dash_yet = this.dash_cooldown_remaining <= 0;
   }
+
+
+    Switch_To_No_Weapon()
+    {
+        Globals.player_weapon = "none"
+    }
+
+
+    Switch_To_Shotgun()
+    {
+        Globals.player_weapon = "shotgun"
+    }
+
+
+    Switch_To_Sniper()
+    {
+        Globals.player_weapon = "sniper"
+        
+    }
+
+
+
 
 
 
@@ -324,6 +376,7 @@ class SquareController extends Component {
 
       this.spawn_player_trails = true
       this.how_many_trails_spawned = 0
+      this.how_many_trails_to_spawn = this.trails_per_dash
       this.trail_spawn_timer = 0
 
       if (this.last_direction == "N")
@@ -366,26 +419,65 @@ class SquareController extends Component {
 
 
 
-  Player_Trail_Protocol()
-  {
-      if (this.how_many_trails_spawned == 0)
-      {
-          this.trail_transperency = 1
-      }
 
-      if (this.how_many_trails_spawned < this.how_many_trails_to_spawn)
-      {
-          while (this.trail_spawn_timer >= this.trail_spawn_interval &&
-              this.how_many_trails_spawned < this.how_many_trails_to_spawn)
-          {
-              instantiate(new PlayerTrailGameObject(this.trail_transperency), this.transform.position.clone()); // we don't use transform
+Player_Trail_Protocol()
+{
 
-              this.spawn_player_trails = false
-              this.how_many_trails_spawned += 1
-              this.trail_spawn_timer -= this.trail_spawn_interval
-          }
-      }
-  }
+    console.log(this.how_many_trails_spawned, this.how_many_trails_to_spawn)
+
+
+    if (this.how_many_trails_spawned < this.how_many_trails_to_spawn)
+    {
+        this.trail_spawn_timer += Time.deltaTime
+
+        if ((this.trail_spawn_timer > this.trail_spawn_interval) )
+        {
+            // lets spawn it
+
+            //this.instantiate(new TrailGameObject(), new Vector2(0, 0), 0)
+            
+            instantiate(new TrailGameObject(), this.transform.position.clone())
+
+            console.log("we would have spawned a trail")
+
+            this.how_many_trails_spawned += 1
+
+            this.trail_spawn_timer = 0
+        }
+    }
+}
+
+
+
+
+
+//   Player_Trail_Protocol()
+//   {
+//     console.log(this.how_many_trails_spawned, this.how_many_trails_to_spawn)
+      
+//     if (this.how_many_trails_spawned == 0)
+//       {
+//           this.trail_transperency = 1
+//       }
+
+//       if (this.how_many_trails_spawned < this.how_many_trails_to_spawn)
+//       {
+
+
+
+//           while (this.trail_spawn_timer >= this.trail_spawn_interval &&
+//               this.how_many_trails_spawned < this.how_many_trails_to_spawn)
+//           {
+//               //instantiate(new PlayerTrailGameObject(this.trail_transperency), this.transform.position.clone()); // we don't use transform
+//             this.instantiate(new TrailGameObject(), new Vector2(0,0), 200)
+            
+
+//               this.spawn_player_trails = false
+//               this.how_many_trails_spawned += 1
+//               this.trail_spawn_timer -= this.trail_spawn_interval
+//           }
+//       }
+//   }
 
 
 

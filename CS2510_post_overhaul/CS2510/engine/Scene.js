@@ -34,6 +34,12 @@ class Scene{
     
     update(){
 
+        
+
+
+        for (const gameObject of this.gameObjects) {
+            gameObject.broadcastMessage("fixedUpdate")
+        }
 
         // = = = = = Collision = = = = =
         const collidable = GameObject.findGameObjectsByType(Collider)
@@ -48,8 +54,19 @@ class Scene{
 
             let worldPositionDOMPoint = matrix.inverse().transformPoint(Input.mousePosition)
             let worldPosition = new Vector2(worldPositionDOMPoint.x, worldPositionDOMPoint.y)
+            Globals.mouse_x = worldPositionDOMPoint.x
+            Globals.mouse_y = worldPositionDOMPoint.y
 
-            for (const gameObject of collidable)
+
+            for (const gameObject of collidable.filter(c=>c.layer!="UI"))
+            {
+                if(Collisions.isCollisionPointPolygon(worldPosition, gameObject))
+                {
+                    gameObject.broadcastMessage("onMouseOver", [])
+                }
+            }
+
+            for (const gameObject of collidable.filter(c=>c.layer === "UI"))
             {
                 if(Collisions.isCollisionPointPolygon(worldPosition, gameObject))
                 {

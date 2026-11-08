@@ -7,6 +7,10 @@ class TextLabel extends Component{
 
     font = "10px Arial" 
 
+    textAlign = "left" 
+
+    textBaseline = "alphabetic"
+
 
     draw(ctx) {
 
@@ -19,6 +23,10 @@ class TextLabel extends Component{
 
         ctx.fillText(this.text, 0, 0)
 
+
+        ctx.textAlign = this.textAlign
+
+        ctx.textBaseline = this.textBaseline
         ctx.font = this.font
 
         ctx.restore();
