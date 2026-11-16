@@ -1,0 +1,14 @@
+class MainScene extends Scene{
+  constructor(){
+    super()
+    this.instantiate(new SquareGameObject(), new Vector2(0,-10), 0)
+    this.instantiate(new CreatureGameObject(), new Vector2(0,-70), 0)
+    this.instantiate(new ShotgunGameObject(), new Vector2(0,0), 0)
+    this.instantiate(new SniperGameObject(), new Vector2(0,0), 0)
+
+
+
+
+    this.instantiate(new PlatformGameObject(), new Vector2(0,50), 0)
+  }
+}

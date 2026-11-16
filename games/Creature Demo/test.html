@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html>
+    <head>
+    <title>Creature Demo</title>
+        <style>
+            *{
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canv">
+
+        
+
+
+
+        </canvas>
+    <script src="../../engine/Vector2.js"></script>
+    <script src="../../engine/Input.js"></script>
+    <script src="../../engine/Engine.js"></script>
+    <script src="../../engine/Component.js"></script>
+    <script src="../../engine/GameObject.js"></script>
+    <script src="../../engine/Scene.js"></script>
+
+    <script src="../../engine/components/Transform.js"></script>
+    <script src="../../engine/components/Polygon.js"></script>
+    <script src="../../engine/components/Camera.js"></script>
+    <script src="../../engine/components/Collider.js"></script>
+
+
+
+    <script src="scenes/MainScene.js"></script>
+    <script src="gameObjects/MainGameObject.js"></script>
+    <script src="components/DrawComponent.js"></script>
+    <script src="components/DrawComponent2.js"></script>
+    <script src="gameObjects/GroundGameObject.js"></script>
+    <script src="gameObjects/PlayerTrailGameObject.js"></script>
+    <script src="gameObjects/CreatureGameObject.js"></script>
+
+
+
+
+
+
+    <script src="components/UpdateComponent.js"></script>
+    <script src="components/TrailUpdateComponent.js"></script>
+    <script src="components/LaserController.js"></script>
+    <script src="gameObjects/LaserGameObject.js"></script>
+    <script src="components/LaserPolygon.js"></script>
+    <script src="components/CreatureUpdateComponent.js"></script>
+
+
+    <script src="../../engine/SceneManager.js"></script>
+    <script src="../../engine/Time.js"></script>
+
+    <script src="./Settings.js"></script>
+    <script src="./Globals.js"></script>
+
+
+
+        <script>
+            
+
+
+            Engine.start(MainScene, Settings);
+            
+        </script>
+    </body>
+
+</html>
